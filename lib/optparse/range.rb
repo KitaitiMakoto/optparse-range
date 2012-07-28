@@ -1,11 +1,25 @@
 require 'optparse'
 
 class OptionParser
+  class << self
+    def accept_range(accepter, converter)
+      accept accepter do |range,|
+        return unless range
+        terms = range.split('-')
+        raise AmbiguousArgument if terms.length > 2
+        terms << terms.first if terms.length == 1
+        Range.new *terms.map(&converter)
+      end
+    end
+  end
+
   decimal = '\d+(?:_\d+)*'
   DecimalRange = /#{decimal}(?:\-#{decimal})/io
+  accept_range DecimalRange, :to_i
 
   float = "(?:#{decimal}(?:\\.(?:#{decimal})?)?|\\.#{decimal})(?:E[-+]?#{decimal})?"
   FloatRange = /#{float}-#{float}/io
+  accept_range FloatRange, :to_f
 
   class DateRange
     class << self
@@ -22,6 +36,7 @@ class OptionParser
       end
     }
   end
+  accept_range DateRange, DateRange.converter
 
   class DateTimeRange
     class << self
@@ -38,6 +53,7 @@ class OptionParser
       end
     }
   end
+  accept_range DateTimeRange, DateTimeRange.converter
 
   class TimeRange
     class << self
@@ -54,18 +70,8 @@ class OptionParser
       end
     }
   end
+  accept_range TimeRange, TimeRange.converter
 
   class StringRange; end
-
-  [[DecimalRange, :to_i], [FloatRange, :to_f],
-   [DateRange, DateRange.converter], [DateTimeRange, DateTimeRange.converter], [TimeRange, TimeRange.converter],
-   [StringRange, :to_s]].each do |(accepter, converter)|
-    accept accepter do |range,|
-      return unless range
-      terms = range.split('-')
-      raise AmbiguousArgument if terms.length > 2
-      terms << terms.first if terms.length == 1
-      Range.new *terms.map(&converter)
-    end
-  end
+  accept_range StringRange, :to_s
 end

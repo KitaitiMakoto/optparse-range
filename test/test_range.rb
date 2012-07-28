@@ -66,6 +66,16 @@ class TestOptionParserRange < Test::Unit::TestCase
     assert_equal(dawn..dusk, daytime)
   end
 
+  def test_string_range
+    chars = nil
+    @opt.def_option '--char=STARTCHAR-ENDCHAR', OptionParser::StringRange do |range|
+      chars = range
+    end
+
+    assert_equal(%w'', no_error {@opt.parse! %w'--char=A-Z'})
+    assert_equal('A'..'Z', chars)
+  end
+
   private
 
   # from Ruby's test_optparse.rb

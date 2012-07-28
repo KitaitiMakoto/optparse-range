@@ -1,16 +1,12 @@
 require 'optparse'
 
 class OptionParser
-  # --port=8080-8082
-  # --page=24-32,34-62 # not implemented for the first
-  # ignore negative value for the first implementation
   decimal = '\d+(?:_\d+)*'
   DecimalRange = /#{decimal}(?:\-#{decimal})/io
 
   float = "(?:#{decimal}(?:\\.(?:#{decimal})?)?|\\.#{decimal})(?:E[-+]?#{decimal})?"
   FloatRange = /#{float}-#{float}/io
 
-  # --period=0701-0730
   class DateRange
     class << self
       attr_reader :converter
@@ -59,7 +55,11 @@ class OptionParser
     }
   end
 
-  [[DecimalRange, :to_i], [FloatRange, :to_f], [DateRange, DateRange.converter], [DateTimeRange, DateTimeRange.converter], [TimeRange, TimeRange.converter]].each do |(accepter, converter)|
+  class StringRange; end
+
+  [[DecimalRange, :to_i], [FloatRange, :to_f],
+   [DateRange, DateRange.converter], [DateTimeRange, DateTimeRange.converter], [TimeRange, TimeRange.converter],
+   [StringRange, :to_s]].each do |(accepter, converter)|
     accept accepter do |range,|
       return unless range
       terms = range.split('-')

@@ -57,8 +57,7 @@ class TestOptionParserRange < Test::Unit::TestCase
       daytime = range
     end
 
-    # assert_equal(%w"", no_error {@opt.parse! %w"--daytime=0430-19:12:14"})
-    @opt.parse! %w'--daytime=4:30-19:12:14'
+    assert_equal(%w"", no_error {@opt.parse! %w'--daytime=04:30-19:12:14'})
     require 'time'
     dawn = '4:30'
     dawn = Time.httpdate(dawn) rescue Time.parse(dawn)

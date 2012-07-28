@@ -4,11 +4,11 @@ class OptionParser
   class << self
     def accept_range(accepter, converter)
       accept accepter do |range,|
-        return unless range
-        terms = range.split('-')
-        raise AmbiguousArgument if terms.length > 2
-        terms << terms.first if terms.length == 1
-        Range.new *terms.map(&converter)
+        return range unless range
+        points = range.split('-')
+        raise AmbiguousArgument if points.length > 2
+        points << points.first if points.length == 1
+        Range.new *points.map(&converter)
       end
     end
   end

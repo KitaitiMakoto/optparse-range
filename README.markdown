@@ -3,6 +3,8 @@ Optparse::Range
 
 TODO: Write a gem description
 
+Inspired by Slop gem's Range feature
+
 Installation
 ------------
 

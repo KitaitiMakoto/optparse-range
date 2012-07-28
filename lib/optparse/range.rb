@@ -13,4 +13,14 @@ class OptionParser
     terms << terms.first if terms.length == 1
     Range.new *terms.map(&:to_i)
   end
+
+  float = "(?:#{decimal}(?:\\.(?:#{decimal})?)?|\\.#{decimal})(?:E[-+]?#{decimal})?"
+  FloatRange = /#{float}-#{float}/io
+  accept FloatRange do |range,|
+    return unless range
+    terms = range.split('-')
+    raise AmbiguousArgument if terms.length > 2
+    terms << terms.first if terms.length == 1
+    Range.new *terms.map(&:to_f)
+  end
 end

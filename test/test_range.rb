@@ -7,21 +7,6 @@ class TestOptionParserRange < Test::Unit::TestCase
     @opt = OptionParser.new
   end
 
-  # from Ruby's test_optparse.rb
-  class DummyOutput < String
-    alias write <<
-  end
-
-  # from Ruby's test_optparse.rb
-  def no_error(*args)
-    $stderr, stderr = DummyOutput.new, $stderr
-    assert_nothing_raised(*args) {return yield}
-  ensure
-    stderr, $stderr = $stderr, stderr
-    $!.backtrace.delete_if {|e| /\A#{Regexp.quote(__FILE__)}:#{__LINE__-2}/o =~ e} if $!
-    assert_empty(stderr)
-  end
-
   def test_decimal_range
     pages = nil
     @opt.def_option '--page=STARTPAGE-ENDPAGE', OptionParser::DecimalRange do |range|
@@ -44,5 +29,22 @@ class TestOptionParserRange < Test::Unit::TestCase
     assert_equal(1.2..64.33, arc)
     assert_equal(%w'', no_error {@opt.parse! %w'--arc=30'})
     assert_equal(30.0..30.0, arc)
+  end
+
+  private
+
+  # from Ruby's test_optparse.rb
+  class DummyOutput < String
+    alias write <<
+  end
+
+  # from Ruby's test_optparse.rb
+  def no_error(*args)
+    $stderr, stderr = DummyOutput.new, $stderr
+    assert_nothing_raised(*args) {return yield}
+  ensure
+    stderr, $stderr = $stderr, stderr
+    $!.backtrace.delete_if {|e| /\A#{Regexp.quote(__FILE__)}:#{__LINE__-2}/o =~ e} if $!
+    assert_empty(stderr)
   end
 end

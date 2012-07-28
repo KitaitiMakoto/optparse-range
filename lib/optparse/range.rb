@@ -6,21 +6,17 @@ class OptionParser
   # ignore negative value for the first implementation
   decimal = '\d+(?:_\d+)*'
   DecimalRange = /#{decimal}(?:\-#{decimal})/io
-  accept DecimalRange do |range,|
-    return unless range
-    terms = range.split('-')
-    raise AmbiguousArgument if terms.length > 2
-    terms << terms.first if terms.length == 1
-    Range.new *terms.map(&:to_i)
-  end
 
   float = "(?:#{decimal}(?:\\.(?:#{decimal})?)?|\\.#{decimal})(?:E[-+]?#{decimal})?"
   FloatRange = /#{float}-#{float}/io
-  accept FloatRange do |range,|
-    return unless range
-    terms = range.split('-')
-    raise AmbiguousArgument if terms.length > 2
-    terms << terms.first if terms.length == 1
-    Range.new *terms.map(&:to_f)
+
+  [[DecimalRange, :to_i], [FloatRange, :to_f]].each do |(accepter, converter)|
+    accept accepter do |range,|
+      return unless range
+      terms = range.split('-')
+      raise AmbiguousArgument if terms.length > 2
+      terms << terms.first if terms.length == 1
+      Range.new *terms.map(&converter)
+    end
   end
 end

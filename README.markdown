@@ -124,6 +124,15 @@ Result:
     $ ./mycommand --myoption=mystart-myend
     {"myoption"=>#<MyClass:0x000000031824c0 @arg="mystart">..#<MyClass:0x00000003182420 @arg="myend">}
 
+Todos
+-----
+
+* Negative numbers
+* More classes
+* `OptioniParser#accept_range`
+* List of range(--page=1-3,6-7)
+* API for `Range` excluding the end point(`1...5` in result)
+
 Contributing
 ------------
 

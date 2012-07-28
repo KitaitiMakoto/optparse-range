@@ -3,9 +3,9 @@ Gem::Specification.new do |gem|
   gem.version       = '0.0.1'
   gem.authors       = ["KITAITI Makoto"]
   gem.email         = ["KitaitiMakoto@gmail.com"]
-  gem.description   = %q{TODO: Write a gem description}
-  gem.summary       = %q{TODO: Write a gem summary}
-  gem.homepage      = ""
+  gem.description   = %q{This RubyGem allows standard bundled `OptionParser` to accept option arguments as `Range` object.}
+  gem.summary       = %q{Range command line arguments handling}
+  gem.homepage      = "https://github.com/KitaitiMakoto/optparse-range"
 
   gem.files         = `git ls-files`.split($/)
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }

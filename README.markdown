@@ -3,9 +3,9 @@ OptionParser::Range
 
 [![Build Status](https://secure.travis-ci.org/KitaitiMakoto/optparse-range.png?branch=master)](http://travis-ci.org/KitaitiMakoto/optparse-range)
 
-This RubyGem allows standard bundled `OptionParser` to accept option arguments as `Range` object.
+This RubyGem allows standard bundled [`OptionParser`][optparse] to accept option arguments as `Range` object.
 
-Inspired by [Slop][slop] gem's [Range][sloprange] feature
+Inspired by [Slop][slop] gem's [Range][sloprange] feature.
 
 Note that `OptionParser::Range` module doesn't exist.
 
@@ -133,12 +133,20 @@ Contributing
 4. Push to the branch (`git push origin my-new-feature`)
 5. Create new Pull Request
 
+Links
+-----
+
+* [Homepage and source code][repo]
+* [Referencees][rubydoc]
+
+[optparse]:  http://rubydoc.info/stdlib/optparse/frames
+[slop]:      https://github.com/injekt/slop
+[sloprange]: https://github.com/injekt/slop/wiki/Ranges
+[repo]:      https://github.com/KitaitiMakoto/optparse-range
+[rubydoc]:   http://rubydoc.info/gems/optparse-range/frames
+
 License
 -------
 
 OptionParser::Range is released under the Ruby's license.
 See the file LICENSE.txt.
-
-<!-- Links -->
-[slop]: https://github.com/injekt/slop
-[sloprange]: https://github.com/injekt/slop/wiki/Ranges

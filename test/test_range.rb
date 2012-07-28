@@ -31,6 +31,42 @@ class TestOptionParserRange < Test::Unit::TestCase
     assert_equal(30.0..30.0, arc)
   end
 
+  def test_date_range
+    period = nil
+    @opt.def_option '--period=STARTDATE-ENDDATE', OptionParser::DateRange do |range|
+      period = range
+    end
+
+    assert_equal(%w'', no_error {@opt.parse! %w'--period=0701-0731'})
+    assert_equal(Date.parse('0701')..Date.parse('0731'), period)
+  end
+
+  def test_date_time_range
+    period = nil
+    @opt.def_option '--period=STARTDATETIME-ENDDATETIME', OptionParser::DateTimeRange do |range|
+      period = range
+    end
+
+    assert_equal(%w'', no_error {@opt.parse! %w'--period=20120601T00:00:00-20120630T24:00:00'})
+    assert_equal(DateTime.parse('20120601T00:00:00')..DateTime.parse('20120630T24:00:00'), period)
+  end
+
+  def test_time_range
+    daytime = nil
+    @opt.def_option '--daytime=DAWNTIME-DUSKTIME', OptionParser::TimeRange do |range|
+      daytime = range
+    end
+
+    # assert_equal(%w"", no_error {@opt.parse! %w"--daytime=0430-19:12:14"})
+    @opt.parse! %w'--daytime=4:30-19:12:14'
+    require 'time'
+    dawn = '4:30'
+    dawn = Time.httpdate(dawn) rescue Time.parse(dawn)
+    dusk = '19:12:14'
+    dusk = Time.httpdate(dusk) rescue Time.parse(dusk)
+    assert_equal(dawn..dusk, daytime)
+  end
+
   private
 
   # from Ruby's test_optparse.rb

@@ -134,6 +134,8 @@ Todos
 * List of range(--page=1-3,6-7)
 * API for `Range` excluding the end point(`1...5` in result)
 * Range with single point, such like --age=-18(under 18) or --page=192-(all after page 192)
+* Alternate delimiters
+* Parsing `Date` such like "2012-07-23"(including "-")
 
 Contributing
 ------------

@@ -30,7 +30,7 @@ Usage
     require 'optparse/range'
     
     opts = OptionParser.new do |opti|
-      opti.on '--page=STARTPAGE-ENDPAGE', OptionParser::DecimalRange
+      opti.on '--page=STARTPAGE-ENDPAGE', OptionParser::DecimalIntegerRange
     end.getopts
     # for instance, when --page=024-160 passed
     opts #=> {"page"=>24..160}
@@ -39,17 +39,17 @@ Usage
 When only one argument passed, it will be handled as both start and end:
 
     opts = OptionParser.new do |opti|
-      opti.on '--port=STARTPORT-ENDPORT', OptionParser::DecimalRange
+      opti.on '--port=STARTPORT-ENDPORT', OptionParser::DecimalIntegerRange
     end
     # when --port=8080
     opts #=> {"port"=>8080..8080}
 
-You can replace `OptionParser::DecimalRange` in above example with other type of `Range`.
+You can replace `OptionParser::DecimalIntegerRange` in above example with other type of `Range`.
 Currently provided:
 
-### `OptionParser::DecimalRange` ###
+### `OptionParser::DecimalIntegerRange` ###
 
-* `Integer` range
+* decimal `Integer` range
 * `--number=1-5` => `1..5`
 *  only zero or positive integers are supported currently
 

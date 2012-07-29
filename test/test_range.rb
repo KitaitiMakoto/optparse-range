@@ -7,9 +7,9 @@ class TestOptionParserRange < Test::Unit::TestCase
     @opt = OptionParser.new
   end
 
-  def test_decimal_range
-    assert_equal 81..123, parse_option(OptionParser::DecimalRange, '081-123')
-    assert_equal 1..1, parse_option(OptionParser::DecimalRange, '1')
+  def test_decimal_integer_range
+    assert_equal 81..123, parse_option(OptionParser::DecimalIntegerRange, '081-123')
+    assert_equal 1..1, parse_option(OptionParser::DecimalIntegerRange, '1')
   end
 
   def test_float_range

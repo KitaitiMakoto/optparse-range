@@ -14,8 +14,8 @@ class OptionParser
   end
 
   decimal = '\d+(?:_\d+)*'
-  DecimalRange = /#{decimal}(?:\-#{decimal})/io
-  accept_range DecimalRange, :to_i
+  DecimalIntegerRange = /#{decimal}(?:\-#{decimal})/io
+  accept_range DecimalIntegerRange, :to_i
 
   float = "(?:#{decimal}(?:\\.(?:#{decimal})?)?|\\.#{decimal})(?:E[-+]?#{decimal})?"
   FloatRange = /#{float}-#{float}/io

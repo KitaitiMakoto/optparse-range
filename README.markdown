@@ -150,7 +150,7 @@ Links
 -----
 
 * [Homepage and source code][repo]
-* [References][rubydoc]
+* [API Documentation][rubydoc]
 
 [optparse]:  http://rubydoc.info/stdlib/optparse/frames
 [slop]:      https://github.com/injekt/slop

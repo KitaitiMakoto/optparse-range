@@ -76,7 +76,7 @@ Currently provided:
 ### `OptionParser::StringRange` ###
 
 * `String` range
-* `--chars=A-Z` => `"A".."Z"`
+* `--password-chars=A-Z` => `"A".."Z"`
 
 Adding Type of Rnage
 --------------------

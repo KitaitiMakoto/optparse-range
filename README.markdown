@@ -148,7 +148,7 @@ Links
 -----
 
 * [Homepage and source code][repo]
-* [Referencees][rubydoc]
+* [References][rubydoc]
 
 [optparse]:  http://rubydoc.info/stdlib/optparse/frames
 [slop]:      https://github.com/injekt/slop

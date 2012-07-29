@@ -36,7 +36,7 @@ Usage
     opts #=> {"page"=>24..160}
     opts['page'].class #=> Range
 
-When only one argument passed, it handled as both start and end:
+When only one argument passed, it will be handled as both start and end:
 
     opts = OptionParser.new do |opti|
       opti.on '--port=STARTPORT-ENDPORT', OptionParser::DecimalRange

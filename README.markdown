@@ -124,8 +124,8 @@ Example:
     end
     
     class MyClassRange; end
-    OptionParser.accept_range MyClassRange do |range|
-      MyClass.parse range
+    OptionParser.accept_range MyClassRange do |point_of_range|
+      MyClass.parse point_of_range
     end
     
     opts = OptionParser.new do |opti|

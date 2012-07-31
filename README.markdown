@@ -45,41 +45,43 @@ When only one argument passed, it will be handled as both start and end:
     opts #=> {"port"=>8080..8080}
 
 You can replace `OptionParser::DecimalIntegerRange` in above example with other type of `Range`.
-Currently provided:
+See below for types currently provided.
 
-### `OptionParser::DecimalIntegerRange` ###
+### Supported Types ###
+
+#### `OptionParser::DecimalIntegerRange` ####
 
 * decimal `Integer` range
 * `--number=1-5` => `1..5`
 *  only zero or positive integers are supported currently
 
-### `OptionParser::FloatRange` ###
+#### `OptionParser::FloatRange` ####
 
 * `Float` range
 * `--ratio=1.2-1.5` => `1.2..1.5`
 * only zero or positive floats are supported currently
 
-### `OptionParser::DateRange` ###
+#### `OptionParser::DateRange` ####
 * `Date` range
 * `--trip=0810-0820` => `#<Date: 2012-08-10 ((2456150j,0s,0n),+0s,2299161j)>..#<Date: 2012-08-20 ((2456160j,0s,0n),+0s,2299161j)>`
 * format including hyphen is not supported currently
   * `--trip=2012-08-10-2012-08-20` => `OptionParser::AmbiguousArgument` raised
 
-### `OptionParser::DateTimeRange` ###
+#### `OptionParser::DateTimeRange` ####
 
 * `DateTime` range
 * `--flight=0810T10:00-0810T12:20` => `#<DateTime: 2012-08-10T10:00:00+00:00 ((2456150j,36000s,0n),+0s,2299161j)>..#<DateTime: 2012-08-10T12:20:00+00:00 ((2456150j,44400s,0n),+0s,2299161j)>`
 * format including hyphen is not supported currently
   * `--trip=2012-08-10T10:00:00-2012-08-20T19:30:00` => `OptionParser::AmbiguousArgument` raised
 
-### `OptionParser::TimeRange` ###
+#### `OptionParser::TimeRange` ####
 
 * `Time` range
 * `--flight=10:00-12:20` => `>2012-07-29 10:00:00 +0900..2012-07-29 12:20:00 +0900`
 * format including hyphen is not supported currently
   * `--trip=2012-08-10T10:00:00-2012-08-20T19:30:00` => `OptionParser::AmbiguousArgument` raised
 
-### `OptionParser::StringRange` ###
+#### `OptionParser::StringRange` ####
 
 * `String` range
 * `--password-chars=A-Z` => `"A".."Z"`

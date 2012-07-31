@@ -96,7 +96,7 @@ To add a type of range, use `OptionParser.accept_range`.
    as the points of `Range`(`MyClassRange`). Class is recommended.
 3. Pass the class and block, `Symbol` or `Proc` which
    converts a point in command line option(`String`) to an object of point(`MyClass`).
-   `lambda` is used here. `to_proc` will be called when `Symbol` is passed.
+   Block is used here. `to_proc` will be called when `Symbol` is passed.
 4. Now, you can pass the class for range(`MyClassRange`) to `OptionParser#on`
    and use the option argument as `Range`.
 

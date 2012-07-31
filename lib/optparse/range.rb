@@ -2,7 +2,7 @@ require 'optparse'
 
 class OptionParser
   class << self
-    def accept_range(accepter, converter)
+    def accept_range(accepter, &converter)
       accept accepter do |range,|
         return range unless range
         points = range.split('-')
@@ -15,14 +15,14 @@ class OptionParser
 
   decimal = '\d+(?:_\d+)*'
   DecimalIntegerRange = /#{decimal}(?:\-#{decimal})/io
-  accept_range DecimalIntegerRange, :to_i
+  accept_range DecimalIntegerRange, &:to_i
 
   float = "(?:#{decimal}(?:\\.(?:#{decimal})?)?|\\.#{decimal})(?:E[-+]?#{decimal})?"
   FloatRange = /#{float}-#{float}/io
-  accept_range FloatRange, :to_f
+  accept_range FloatRange, &:to_f
 
   class StringRange; end
-  accept_range StringRange, :to_s
+  accept_range StringRange, &:to_s
 
   class DateRange
     class << self
@@ -39,7 +39,7 @@ class OptionParser
       end
     }
   end
-  accept_range DateRange, DateRange.converter
+  accept_range DateRange, &DateRange.converter
 
   class DateTimeRange
     class << self
@@ -56,7 +56,7 @@ class OptionParser
       end
     }
   end
-  accept_range DateTimeRange, DateTimeRange.converter
+  accept_range DateTimeRange, &DateTimeRange.converter
 
   class TimeRange
     class << self
@@ -73,5 +73,5 @@ class OptionParser
       end
     }
   end
-  accept_range TimeRange, TimeRange.converter
+  accept_range TimeRange, &TimeRange.converter
 end

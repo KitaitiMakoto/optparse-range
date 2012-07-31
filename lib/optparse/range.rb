@@ -21,6 +21,9 @@ class OptionParser
   FloatRange = /#{float}-#{float}/io
   accept_range FloatRange, :to_f
 
+  class StringRange; end
+  accept_range StringRange, :to_s
+
   class DateRange
     class << self
       attr_reader :converter
@@ -71,7 +74,4 @@ class OptionParser
     }
   end
   accept_range TimeRange, TimeRange.converter
-
-  class StringRange; end
-  accept_range StringRange, :to_s
 end

@@ -2,12 +2,13 @@ require 'optparse'
 
 class OptionParser
   class << self
-    def accept_range(accepter, &converter)
+    def accept_range(accepter, converter=nil, &block)
       accept accepter do |range,|
         return range unless range
         points = range.split('-')
         raise AmbiguousArgument if points.length > 2
         points << points.first if points.length == 1
+        converter = block if block
         Range.new *points.map(&converter)
       end
     end

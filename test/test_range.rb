@@ -40,6 +40,12 @@ class TestOptionParserRange < Test::Unit::TestCase
     assert_equal 'A'..'Z', parse_option(OptionParser::StringRange, 'A-Z')
   end
 
+  def test_ambiguous_argument
+    assert_raise OptionParser::AmbiguousArgument do
+      parse_option OptionParser::DateRange, '2012-07-31-2012-08-01'
+    end
+  end
+
   private
 
   def parse_option(accepter, arg)

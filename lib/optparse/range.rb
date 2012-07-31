@@ -16,63 +16,48 @@ class OptionParser
 
   decimal = '\d+(?:_\d+)*'
   DecimalIntegerRange = /#{decimal}(?:\-#{decimal})/io
-  accept_range DecimalIntegerRange, &:to_i
+  accept_range DecimalIntegerRange, :to_i
 
   float = "(?:#{decimal}(?:\\.(?:#{decimal})?)?|\\.#{decimal})(?:E[-+]?#{decimal})?"
   FloatRange = /#{float}-#{float}/io
-  accept_range FloatRange, &:to_f
+  accept_range FloatRange, :to_f
 
   class StringRange; end
-  accept_range StringRange, &:to_s
+  accept_range StringRange, :to_s
 
-  class DateRange
-    class << self
-      attr_reader :converter
+  class DateRange; end
+  accept_range DateRange do |date|
+    begin
+      Date.parse date
+    rescue NameError
+      require 'date'
+      retry
+    rescue ArgumentError
+      raise InvalidArgument, date
     end
-    @converter = lambda {|date|
-      begin
-        Date.parse date
-      rescue NameError
-        require 'date'
-        retry
-      rescue ArgumentError
-        raise InvalidArgument, date
-      end
-    }
   end
-  accept_range DateRange, &DateRange.converter
 
-  class DateTimeRange
-    class << self
-      attr_reader :converter
+  class DateTimeRange; end
+  accept_range DateTimeRange do |dt|
+    begin
+      DateTime.parse dt
+    rescue NameError
+      require 'date'
+      retry
+    rescue ArgumentError
+      raise InvalidArgument, dt
     end
-    @converter = lambda {|dt|
-      begin
-        DateTime.parse dt
-      rescue NameError
-        require 'date'
-        retry
-      rescue ArgumentError
-        raise InvalidArgument, dt
-      end
-    }
   end
-  accept_range DateTimeRange, &DateTimeRange.converter
 
-  class TimeRange
-    class << self
-      attr_reader :converter
+  class TimeRange; end
+  accept_range TimeRange do |time|
+    begin
+      Time.httpdate(time) rescue Time.parse(time)
+    rescue NoMethodError
+      require 'time'
+      retry
+    rescue
+      raise InvalidArgument, time
     end
-    @converter = lambda {|time|
-      begin
-        Time.httpdate(time) rescue Time.parse(time)
-      rescue NoMethodError
-        require 'time'
-        retry
-      rescue
-        raise InvalidArgument, time
-      end
-    }
   end
-  accept_range TimeRange, &TimeRange.converter
 end

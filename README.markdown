@@ -84,9 +84,13 @@ Adding Type of Rnage
 To add a type of range, use `OptionParser.accept_range`.
 
 1. Define class which can be used as points of `Range`(`MyClass` here).
-2. Define class or `Regexp` which allows `OptionParser` to accept class above as the points of `Range`(`MyClassRange`). Class is recommended.
-3. Pass the class and `Symbol` or `Proc` which converts a command line option(`String`) to an object of point(`MyClass`). `lambda` is used here. `to_proc` will be called when `Symbol` is passed.
-4. Now, you can pass the class for range(`MyClassRange`) to `OptionParser#on` and use the option argument as `Range`.
+2. Define class or `Regexp` which allows `OptionParser` to accept class above
+   as the points of `Range`(`MyClassRange`). Class is recommended.
+3. Pass the class and block, `Symbol` or `Proc` which
+   converts a point in command line option(`String`) to an object of point(`MyClass`).
+   `lambda` is used here. `to_proc` will be called when `Symbol` is passed.
+4. Now, you can pass the class for range(`MyClassRange`) to `OptionParser#on`
+   and use the option argument as `Range`.
 
 Example:
 
@@ -112,7 +116,9 @@ Example:
     end
     
     class MyClassRange; end
-    OptionParser.accept_range MyClassRange, lambda {|range| MyClass.parse range}
+    OptionParser.accept_range MyClassRange do |range|
+      MyClass.parse range
+    end
     
     opts = OptionParser.new do |opti|
       opti.on '--myoption=MYSTART-MYEND', MyClassRange

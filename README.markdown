@@ -62,16 +62,22 @@ Currently provided:
 ### `OptionParser::DateRange` ###
 * `Date` range
 * `--trip=0810-0820` => `#<Date: 2012-08-10 ((2456150j,0s,0n),+0s,2299161j)>..#<Date: 2012-08-20 ((2456160j,0s,0n),+0s,2299161j)>`
+* format including hyphen is not supported currently
+  * `--trip=2012-08-10-2012-08-20` => `OptionParser::AmbiguousArgument` raised
 
 ### `OptionParser::DateTimeRange` ###
 
 * `DateTime` range
 * `--flight=0810T10:00-0810T12:20` => `#<DateTime: 2012-08-10T10:00:00+00:00 ((2456150j,36000s,0n),+0s,2299161j)>..#<DateTime: 2012-08-10T12:20:00+00:00 ((2456150j,44400s,0n),+0s,2299161j)>`
+* format including hyphen is not supported currently
+  * `--trip=2012-08-10T10:00:00-2012-08-20T19:30:00` => `OptionParser::AmbiguousArgument` raised
 
 ### `OptionParser::TimeRange` ###
 
 * `Time` range
 * `--flight=10:00-12:20` => `>2012-07-29 10:00:00 +0900..2012-07-29 12:20:00 +0900`
+* format including hyphen is not supported currently
+  * `--trip=2012-08-10T10:00:00-2012-08-20T19:30:00` => `OptionParser::AmbiguousArgument` raised
 
 ### `OptionParser::StringRange` ###
 

@@ -30,8 +30,7 @@ class OptionParser
     begin
       Date.parse date
     rescue NameError
-      require 'date'
-      retry
+      retry if require 'date'
     rescue ArgumentError
       raise InvalidArgument, date
     end
@@ -42,8 +41,7 @@ class OptionParser
     begin
       DateTime.parse dt
     rescue NameError
-      require 'date'
-      retry
+      retry if require 'date'
     rescue ArgumentError
       raise InvalidArgument, dt
     end
@@ -54,8 +52,7 @@ class OptionParser
     begin
       Time.httpdate(time) rescue Time.parse(time)
     rescue NoMethodError
-      require 'time'
-      retry
+      retry if require 'time'
     rescue
       raise InvalidArgument, time
     end

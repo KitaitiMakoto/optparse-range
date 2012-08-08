@@ -1,6 +1,6 @@
 Gem::Specification.new do |gem|
   gem.name          = "optparse-range"
-  gem.version       = '0.0.2'
+  gem.version       = '0.0.3'
   gem.authors       = ["KITAITI Makoto"]
   gem.email         = ["KitaitiMakoto@gmail.com"]
   gem.description   = %q{This RubyGem allows standard bundled `OptionParser` to accept option arguments as `Range` object.}

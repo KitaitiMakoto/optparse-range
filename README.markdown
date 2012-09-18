@@ -1,8 +1,6 @@
 OptionParser::Range
 ===================
 
-[![Build Status](https://secure.travis-ci.org/KitaitiMakoto/optparse-range.png?branch=master)](http://travis-ci.org/KitaitiMakoto/optparse-range)
-
 This RubyGem allows standard bundled [`OptionParser`][optparse] to accept option arguments as `Range` object.
 
 Inspired by [Slop][slop] gem's [Range][sloprange] feature.
